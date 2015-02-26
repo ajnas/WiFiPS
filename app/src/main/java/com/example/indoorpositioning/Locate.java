@@ -1,12 +1,18 @@
 package com.example.indoorpositioning;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.widget.AdapterView;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +31,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Locate extends Activity {
 
 	ArrayList<String> buildings;
@@ -184,4 +203,99 @@ public class Locate extends Activity {
 		
 	}
 
+
+
+    private class SubmitLocation extends AsyncTask<String, Integer, JSONObject> {
+        private String baseUrl = "";
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            // TODO Auto-generated method stub
+            try {
+                return postData(params[0]);
+            } catch (IOException e) {
+                return null;
+            }
+
+
+        }
+
+        protected void onPostExecute(JSONObject json) {
+
+            if (json == null)
+            {
+                Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_LONG).show();
+            }
+            else {
+
+                try {
+                    if (json.get("result").equals("success")) {
+                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+
+
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
+
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Network/Server Error", Toast.LENGTH_LONG).show();
+                }
+            }
+
+
+        }
+
+
+        protected void onProgressUpdate(Integer... progress) {
+
+        }
+
+        public JSONObject postData(String location) throws IOException {
+            // Create a new HttpClient and Post Header
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(baseUrl + "submit");
+
+            try {
+                // Add your data
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+                WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+                WifiInfo info = wifiManager.getConnectionInfo();
+
+                String mac = info.getMacAddress();
+                nameValuePairs.add(new BasicNameValuePair("mac", mac));
+                nameValuePairs.add(new BasicNameValuePair("building_id",location));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                JSONObject json = null;
+                if (response == null)
+                    return null;
+                else {
+                    try {
+                        json = new JSONObject(EntityUtils.toString(response.getEntity()));
+                    } catch (JSONException e) {
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                return json;
+
+            } catch (ClientProtocolException e) {
+                // TODO Auto-generated catch block
+                return null;
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                return null;
+            }
+        }
+
+    }
 }

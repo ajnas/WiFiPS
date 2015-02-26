@@ -47,6 +47,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -119,9 +120,19 @@ public class Positions extends Activity {
 						Buildings.class);
 				setResult(2, intent);
                 ArrayList<PositionData> buildingReadings=db.getReadings(building);
+                ArrayList<Router> friendlyWifis=db.getFriendlyWifis(building);
+                String buildingReadingsJson=gson.toJson(buildingReadings);
+                String friendlyWifisJson= gson.toJson(friendlyWifis);
+                JSONObject json=new JSONObject();
+                try {
+                    json.accumulate("building_id",building);
+                    json.accumulate("readings",new JSONArray(buildingReadingsJson));
+                    json.accumulate("friendly_wifis",new JSONArray(friendlyWifisJson));
 
-                String readings=gson.toJson(buildingReadings);
-                new Submit().execute(readings);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                new Submit().execute(json.toString());
 				finish();
 
 			}
@@ -204,7 +215,7 @@ public class Positions extends Activity {
 
 
     private class Submit extends AsyncTask<String, Integer, JSONObject> {
-        private String baseUrl = "";
+        private String baseUrl = "http://ajnas.in/wifips/api/";
 
         @Override
         protected JSONObject doInBackground(String... params) {
@@ -252,7 +263,7 @@ public class Positions extends Activity {
 
         }
 
-        public JSONObject postData(String readings) throws IOException {
+        public JSONObject postData(String jsonData) throws IOException {
             // Create a new HttpClient and Post Header
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(baseUrl + "submit");
@@ -265,11 +276,9 @@ public class Positions extends Activity {
                 WifiInfo info = wifiManager.getConnectionInfo();
 
                 String mac = info.getMacAddress();
+                Log.d("Data Sent",jsonData);
                 nameValuePairs.add(new BasicNameValuePair("mac", mac));
-                nameValuePairs.add(new BasicNameValuePair("building",building));
-
-
-                nameValuePairs.add(new BasicNameValuePair("data",readings));
+                nameValuePairs.add(new BasicNameValuePair("data",jsonData));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
 
                 // Execute HTTP Post Request

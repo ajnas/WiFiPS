@@ -13,6 +13,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public static final String DATABASE_NAME = "wifips.db";
@@ -53,10 +60,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	}
 
+
 	public boolean deleteBuilding(String building_id) {
-		
 		SQLiteDatabase db = getWritableDatabase();
-		
 		String[] args = new String[] { building_id };
 		db.delete(AP_TABLE,"building_id=?",args);
 		db.delete(READINGS_TABLE, "building_id=?", args);
@@ -147,6 +153,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return true;
 
 	}
+
+    public boolean updateDatabase(JSONArray buildings) throws JSONException {
+        Gson gson=new Gson();
+
+        for(int i=0;i<buildings.length();i++){
+            JSONObject building=buildings.getJSONObject(i);
+            String building_id=building.getString("building_id");
+
+            ArrayList<PositionData> readings= null;
+            ArrayList<Router> friendlyWifis=null;
+
+
+
+            try {
+               Log.d("Readings",building.get("readings").toString());
+
+                readings = gson.fromJson(building.get("readings").toString(),new TypeToken<ArrayList<PositionData>>() {
+                }.getType());
+                friendlyWifis=gson.fromJson((String) building.get("friendly_wifis"),new TypeToken<ArrayList<Router>>() {
+                }.getType());
+                deleteBuilding(building_id);
+                for(int j=0;j<readings.size();j++){
+                    addReadings(building.getString("building_id"),readings.get(j));
+                }
+                addFriendlyWifis(building.getString("building_id"),friendlyWifis);
+
+            } catch (JSONException e) {
+                return false;
+            }
+
+
+
+        }
+        return true;
+
+    }
+
 
 	public ArrayList<PositionData> getReadings(String building_id) {
 		HashMap<String, PositionData> positions = new HashMap<String, PositionData>();
