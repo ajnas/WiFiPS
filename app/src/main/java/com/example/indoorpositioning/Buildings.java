@@ -22,6 +22,7 @@ public class Buildings extends Activity {
 	Button add;
 	EditText buildingName;
 	ArrayAdapter<String> arrayAdapter;
+
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
@@ -29,6 +30,7 @@ public class Buildings extends Activity {
 		db=new DatabaseHelper(this);
 		add=(Button) findViewById(R.id.add);
 		buildingName= (EditText) findViewById(R.id.name);
+
 		add.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

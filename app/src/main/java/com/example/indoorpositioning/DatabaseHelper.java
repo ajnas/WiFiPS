@@ -139,14 +139,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		deleteReading(building_id, positionData.getName());
 
 		SQLiteDatabase db = getWritableDatabase();
-		for (Map.Entry<Router, Integer> e : positionData.getValues().entrySet()) {
+		for (Map.Entry<String, Integer> e : positionData.getValues().entrySet()) {
 			ContentValues cv = new ContentValues();
 			cv.put("building_id", building_id);
 			cv.put("position_id", positionData.getName());
-			cv.put("ssid", e.getKey().getSSID());
-			cv.put("mac_id", e.getKey().getBSSID());
+			cv.put("ssid",positionData.routers.get(e.getKey()));
+			cv.put("mac_id",e.getKey());
 			cv.put("rssi", e.getValue());
-			Log.v(e.getKey().getSSID(), e.getValue().toString());
+			Log.v(e.getKey(), e.getValue().toString());
 			db.insert(READINGS_TABLE, null, cv);
 		}
 		System.out.println("Adding done");
@@ -171,7 +171,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 readings = gson.fromJson(building.get("readings").toString(),new TypeToken<ArrayList<PositionData>>() {
                 }.getType());
-                friendlyWifis=gson.fromJson((String) building.get("friendly_wifis"),new TypeToken<ArrayList<Router>>() {
+                friendlyWifis=gson.fromJson(building.get("friendly_wifis").toString()
+                        ,new TypeToken<ArrayList<Router>>() {
                 }.getType());
                 deleteBuilding(building_id);
                 for(int j=0;j<readings.size();j++){

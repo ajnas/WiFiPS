@@ -37,10 +37,12 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -105,9 +107,16 @@ public class Locate extends Activity {
 			}
 		});
 		builder.show();
+
 	}
 
-	@Override
+    @Override
+    protected void onResume() {
+        new FetchData(this).execute();
+        super.onResume();
+    }
+
+    @Override
 	protected void onActivityResult(int requestCode, int resultCode,
 			Intent intent) {
 		// TODO Auto-generated method stub
@@ -298,4 +307,5 @@ public class Locate extends Activity {
         }
 
     }
+
 }

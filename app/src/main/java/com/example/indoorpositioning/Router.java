@@ -21,7 +21,7 @@ public class Router implements Serializable{
 	
 	@Override
 	public String toString(){
-		return BSSID;
+		return SSID;
 	}
 	@Override
 	public boolean equals(Object arg){

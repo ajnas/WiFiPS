@@ -132,7 +132,7 @@ public class Positions extends Activity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                new Submit().execute(json.toString());
+                new Submit(getApplicationContext()).execute(json.toString());
 				finish();
 
 			}
@@ -214,99 +214,5 @@ public class Positions extends Activity {
 	}
 
 
-    private class Submit extends AsyncTask<String, Integer, JSONObject> {
-        private String baseUrl = "http://ajnas.in/wifips/api/";
-
-        @Override
-        protected JSONObject doInBackground(String... params) {
-            // TODO Auto-generated method stub
-            try {
-                return postData(params[0]);
-            } catch (IOException e) {
-                return null;
-            }
-
-
-        }
-
-        protected void onPostExecute(JSONObject json) {
-
-            if (json == null)
-            {
-                Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_LONG).show();
-            }
-            else {
-
-                try {
-                    if (json.get("result").equals("success")) {
-                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
-
-
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
-
-
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Network/Server Error", Toast.LENGTH_LONG).show();
-                }
-            }
-
-
-        }
-
-
-        protected void onProgressUpdate(Integer... progress) {
-
-        }
-
-        public JSONObject postData(String jsonData) throws IOException {
-            // Create a new HttpClient and Post Header
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(baseUrl + "submit");
-
-            try {
-                // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-                WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-                WifiInfo info = wifiManager.getConnectionInfo();
-
-                String mac = info.getMacAddress();
-                Log.d("Data Sent",jsonData);
-                nameValuePairs.add(new BasicNameValuePair("mac", mac));
-                nameValuePairs.add(new BasicNameValuePair("data",jsonData));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
-
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
-                JSONObject json = null;
-                if (response == null)
-                    return null;
-                else {
-                    try {
-                        json = new JSONObject(EntityUtils.toString(response.getEntity()));
-                    } catch (JSONException e) {
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                return json;
-
-            } catch (ClientProtocolException e) {
-                // TODO Auto-generated catch block
-                return null;
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                return null;
-            }
-        }
-
-    }
 
 }
