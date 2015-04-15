@@ -4,23 +4,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter building name"
-        android:ems="10" >
+        android:orientation="horizontal">
 
-        <requestFocus />
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter building name"
+            android:ems="10" >
         </EditText>
-
         <Button
             android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add" />
+            android:text="Add"
+            android:enabled="false"
+            android:layout_gravity="right" />
 
-        <ListView
+
+        <requestFocus />
+
+        </LinearLayout>
+
+
+
+    <ListView
             android:id="@+id/buildingslist"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -28,11 +39,6 @@
             android:dividerHeight="0.1dp" >
         </ListView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Update"
-        android:id="@+id/updateBuildings" />
 
 
 </LinearLayout>
