@@ -1,36 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-	
 
-    
-
-    <TextView
-        android:id="@+id/head"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Enter number of seconds" />
-    
+        android:text="Learn"
+        android:id="@+id/learn_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_above="@+id/locate_button"
+        android:layout_alignLeft="@+id/locate_button"
+        android:onClick="onClick"
+        android:layout_alignStart="@+id/locate_button" />
 
-    <EditText
-        android:id="@+id/seconds"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10" >
-	
-        <requestFocus />
-    </EditText>
-    
-    
     <Button
-    android:id="@+id/ok_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="OK"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Locate"
+        android:id="@+id/locate_button"
+        android:onClick="onClick"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
-    
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sync"
+        android:onClick="onClick"
+        android:id="@+id/sync_button"
+        android:layout_below="@+id/locate_button"
+        android:layout_centerHorizontal="true"
+        />
 
-</LinearLayout>
+
+</RelativeLayout>

@@ -11,27 +11,38 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class StartingScreen extends Activity {
-	private Button ok;
-	// private EditText number;
-	private EditText seconds;
+    private Button learnButton;
+    private Button locateButton;
+    private Button syncButton;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.starting_screen);
-		ok = (Button) findViewById(R.id.ok_button);
-		seconds = (EditText) findViewById(R.id.seconds);
 
-		ok.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(StartingScreen.this, Positions.class);
-				intent.putExtra("NUMBER_OF_SECONDS", seconds.getText()
-						.toString());
-				startActivity(intent);
-				finish();
-			}
-		});
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.starting_screen);
+    }
 
+
+    public void onClick(View view) {
+
+        Button button= (Button) view;
+        Intent intent;
+        switch (button.getId()) {
+            case R.id.learn_button:
+                intent = new Intent(StartingScreen.this, Buildings.class);
+                startActivity(intent);
+                break;
+            case R.id.locate_button:
+                intent = new Intent(StartingScreen.this, Locate.class);
+                startActivity(intent);
+                break;
+            case R.id.sync_button:
+                break;
+            default:
+                break;
+
+        }
+
+    }
 
 }
