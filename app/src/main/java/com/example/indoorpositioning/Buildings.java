@@ -110,6 +110,15 @@ public class Buildings extends Activity {
 
 	}
 
-	
+    @Override
+    protected void onResume() {
+        buildings = db.getBuildings();
+        arrayAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,buildings);
+        buildingsList.setAdapter(arrayAdapter);
+        buildingName.setText("");
+        add.setEnabled(false);
+        super.onResume();
+    }
 }
 
