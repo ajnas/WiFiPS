@@ -38,10 +38,8 @@ public class Buildings extends Activity {
 				String input=buildingName.getText().toString();
 				Intent intent=new Intent(getApplicationContext(),Positions.class);
 				intent.putExtra("BUILDING_NAME",input);
-				//intent.putExtra("NUMBER_OF_SECONDS",readingCount);
 				startActivityForResult(intent,0);
-				
-				
+
 			}
 		});
 		buildings = db.getBuildings();
@@ -63,28 +61,34 @@ public class Buildings extends Activity {
 		    String selectedBuilding=(String)parent.getItemAtPosition(position);
 		    Intent intent=new Intent(getApplicationContext(),Positions.class);
 			intent.putExtra("BUILDING_NAME",selectedBuilding);
-			//intent.putExtra("NUMBER_OF_SECONDS",readingCount);
 			startActivityForResult(intent,0);
-		    
-		    
 		    
 		    }
 
 			
 		});
-		 buildingsList.setOnItemLongClickListener(new OnItemLongClickListener() {
 
-		        @Override
-		        public boolean onItemLongClick(AdapterView<?> parent, View view,
-		                int arg2, long arg3) {
-		        	db.deleteBuilding(buildings.get(arg2));
-		        	buildings.remove(arg2);
-		        	
-		        	arrayAdapter.notifyDataSetChanged();
-		            return false;
-		        }
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        buildingsList,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
 
-		    });
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    db.deleteBuilding(buildings.get(position));
+                                    buildings.remove(position);
+                                    arrayAdapter.notifyDataSetChanged();
+
+                                }
+
+                            }
+                        });
+        buildingsList.setOnTouchListener(touchListener);
 		
 
 	}
