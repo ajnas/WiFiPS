@@ -4,15 +4,9 @@
     tools:context="com.example.indoorpositioning.MainActivity" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/friendly_wifis"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never"/>
-    
-     <item
-        android:id="@+id/take_readings"
-        android:orderInCategory="100"
-        android:title="Learn"
+        android:title="Choose Friendly WiFis"
         app:showAsAction="never"/>
 
 </menu>

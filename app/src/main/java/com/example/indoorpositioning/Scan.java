@@ -72,7 +72,7 @@ public class Scan extends Activity {
 		
 		currentPositionName =null;
 		if(intent.getBooleanExtra("isLearning",true))
-			currentPositionName = intent.getStringExtra("PLACE_NAME");
+			currentPositionName = intent.getStringExtra("POSITION_NAME");
 		
 		calibrate.setOnClickListener(new OnClickListener() {
 			@Override
@@ -167,29 +167,12 @@ public class Scan extends Activity {
 
 		Intent intent = new Intent(getApplicationContext(), Positions.class);
 		intent.putExtra("PositionData", (Serializable) positionData);
-		setResult(2,intent);
+		setResult(RESULT_OK,intent);
 		finish();
 		
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		
-		return super.onOptionsItemSelected(item);
-	}
+
 }

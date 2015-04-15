@@ -41,7 +41,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Settings extends Activity {
+public class FriendlyWifis extends Activity {
 	private Button addWifi;
 	WifiManager wifi;
 	List<ScanResult> results;

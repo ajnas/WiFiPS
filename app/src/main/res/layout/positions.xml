@@ -13,10 +13,10 @@
         android:id="@+id/textHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter place name and calibrate" />
+        android:text="Enter a new position name and calibrate" />
 
     <EditText
-        android:id="@+id/placename"
+        android:id="@+id/position_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10" >
@@ -26,6 +26,7 @@
 
     <Button
         android:id="@+id/calibratebutton"
+        android:enabled="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

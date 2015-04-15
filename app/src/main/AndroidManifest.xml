@@ -46,7 +46,7 @@
         <activity android:name=".Locate">
 
         </activity>
-        <activity android:name=".Settings">
+        <activity android:name=".FriendlyWifis">
 
         </activity>
 

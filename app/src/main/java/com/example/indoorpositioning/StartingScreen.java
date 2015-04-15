@@ -37,6 +37,7 @@ public class StartingScreen extends Activity {
                 startActivity(intent);
                 break;
             case R.id.sync_button:
+                new FetchData(this).execute();
                 break;
             default:
                 break;

@@ -11,13 +11,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="20px"
         android:text="Locate" />
-    <ImageView
-        android:id="@+id/locationimage"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-       />
 
 
     <LinearLayout
