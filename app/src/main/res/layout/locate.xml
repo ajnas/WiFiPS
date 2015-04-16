@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+ >
 
 
     <Button
@@ -11,26 +11,52 @@
         android:layout_height="wrap_content"
         android:paddingTop="20px"
         android:text="Locate"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_marginBottom="100dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 
-    <LinearLayout
-        android:id="@+id/everythingelse"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:id="@+id/result"
+        android:textSize="35dp"
+        android:text=""
+        android:textColor="#ff0000"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
-      
+    <TextView
 
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your position"
+        android:textSize="30dp"
 
-            <TextView
-                android:id="@+id/result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </ScrollView>
-    </LinearLayout>
+        android:paddingBottom="30dp"
+        android:layout_above="@+id/result"
+        android:layout_centerHorizontal="true" />
 
-</LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/everythingelse"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical" >-->
+
+      <!---->
+
+        <!--<ScrollView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" >-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/result"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+        <!--</ScrollView>-->
+    <!--</LinearLayout>-->
+
+</RelativeLayout>

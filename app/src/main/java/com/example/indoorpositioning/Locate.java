@@ -46,7 +46,7 @@ public class Locate extends Activity {
 	String building;
 	TextView result;
 	Button locate;
-	LinearLayout everyThingElse;
+
 
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
@@ -54,7 +54,7 @@ public class Locate extends Activity {
 		db = new DatabaseHelper(this);
 		buildings = db.getBuildings();
 		locate = (Button) findViewById(R.id.locate);
-		everyThingElse=(LinearLayout) findViewById(R.id.everythingelse);
+
 		result = (TextView) findViewById(R.id.result);
 		arrayAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, buildings);
@@ -133,17 +133,19 @@ public class Locate extends Activity {
 
 		}
 		if (min_distance == PositionData.MAX_DISTANCE){
-			closestPosition = "OUTOFRANGE";
+          closestPosition="OUT OF RANGE";
+          Toast.makeText(this,"You are out of range of the selected building",Toast.LENGTH_LONG).show();
 
 		}
+        result.setText(closestPosition);
 
 		
 			
 		res += "\nCurrent:\n" + positionData.toString();
 		Log.v("Result",res);
-		
-		result.setText("You are at " + closestPosition + "\n" + res);
-		//everyThingElse.setVisibility(LinearLayout.GONE);
+
+
+
 		
 		super.onActivityResult(requestCode, resultCode, intent);
         }
