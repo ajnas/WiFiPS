@@ -11,10 +11,10 @@ A MVP android application which is able to estimate the position of a user withi
 ##Testing the App
 
 * Run the app to your android phone.
-* Turn on wifi
+* Turn on WiFi
 * Go to some building were at least 3 wifi access points are available.
 
-	### Learning/Calibrating
+	### Learn/Calibrate
 * Choose the 'Learn' option from the first screen.
 * Enter a name for the new building and press Add
 * Now you need to find different distinguishable positions inside the building. For better results, choose different rooms inside the building as different positions.
@@ -59,11 +59,12 @@ A MVP android application which is able to estimate the position of a user withi
 		- Url 	 : 
 		- Response : 
 			{result:"success"} or {result:"failure"}
-How to Contribute
-==================
+
+##How to Contribute
 * Fork the repo
 * Commit changes to a branch in your fork
 * Pull request with your changes
-Developers
-===========
+
+##Developers
+
 [Ajnas](https://github.com/ajnas) and [Jazeem](https://github.com/jazeem). Feel free to contact us in case of any issue while setting up/testing. 
