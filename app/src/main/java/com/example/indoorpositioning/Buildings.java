@@ -42,7 +42,7 @@ public class Buildings extends Activity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                if(charSequence.equals("")){
+                if(charSequence.toString().equals("")){
                     add.setEnabled(false);
                 }
                 else
