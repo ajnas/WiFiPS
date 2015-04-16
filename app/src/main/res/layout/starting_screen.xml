@@ -4,8 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+
+
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:text="Learn"
         android:id="@+id/learn_button"
@@ -14,9 +16,17 @@
         android:layout_alignLeft="@+id/locate_button"
         android:onClick="onClick"
         android:layout_alignStart="@+id/locate_button" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Main Menu"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/learn_button"
+        android:id="@+id/textView" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:text="Locate"
         android:id="@+id/locate_button"
@@ -26,7 +36,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:text="Sync"
         android:onClick="onClick"

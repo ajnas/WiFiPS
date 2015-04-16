@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="20px"
-        android:text="Locate" />
+        android:text="Locate"
+        android:layout_gravity="center_horizontal"/>
 
 
     <LinearLayout
