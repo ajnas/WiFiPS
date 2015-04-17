@@ -20,17 +20,17 @@
 
         <activity
             android:name=".Scan"
-            android:label="@string/app_name">
+            android:label="Scan">
 
         </activity>
         <activity
             android:name=".Positions"
-            android:label="@string/app_name">
+            android:label="Calibrate">
 
         </activity>
         <activity
             android:name=".Buildings"
-            android:label="@string/app_name">
+            android:label="Buildings">
 
         </activity>
         <activity
@@ -43,10 +43,12 @@
 
         </activity>
 
-        <activity android:name=".Locate">
+        <activity android:name=".Locate"
+            android:label="Locate">
 
         </activity>
-        <activity android:name=".FriendlyWifis">
+        <activity android:name=".FriendlyWifis"
+            android:label="Choose Friendly Wifis">
 
         </activity>
 

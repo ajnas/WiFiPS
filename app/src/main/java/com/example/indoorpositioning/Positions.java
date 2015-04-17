@@ -53,7 +53,7 @@ public class Positions extends Activity {
     DatabaseHelper db;
     private Boolean isLearning = true;
     static final int SCAN_REQUEST = 0;
-
+    Button friendlyWifisButton;
 
     private List<PositionData> positionsData;
     private PositionData positionData;
@@ -65,6 +65,15 @@ public class Positions extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.positions);
+        friendlyWifisButton= (Button) findViewById(R.id.friendly_wifis_button);
+        friendlyWifisButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), FriendlyWifis.class);
+                intent.putExtra("BUILDING_NAME", building);
+                startActivity(intent);
+            }
+        });
         textHeading = (TextView) findViewById(R.id.textHeading);
         positionName = (EditText) findViewById(R.id.position_name);
         calibrate = (Button) findViewById(R.id.calibratebutton);
@@ -206,27 +215,7 @@ public class Positions extends Activity {
         super.onResume();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.friendly_wifis) {
-            Intent intent = new Intent(this, FriendlyWifis.class);
-            intent.putExtra("BUILDING_NAME", building);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
 }

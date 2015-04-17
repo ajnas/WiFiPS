@@ -9,21 +9,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <TextView
-        android:id="@+id/textHeading"
+    <Button
+        android:id="@+id/friendly_wifis_button"
+        android:enabled="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter a new position name and calibrate" />
+        android:layout_gravity="center_horizontal"
+        android:text="Choose Friendly Wifis" />
 
     <EditText
         android:id="@+id/position_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Enter a new position name and calibrate"
         android:ems="10" >
 
         <requestFocus />
     </EditText>
-
+    
     <Button
         android:id="@+id/calibratebutton"
         android:enabled="false"
@@ -31,7 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Calibrate" />
-
 
           <ListView
             android:id="@+id/positionslist"

@@ -17,6 +17,7 @@ A MVP android application which is able to estimate the position of a user withi
 	### Learn/Calibrate
 * Choose the 'Learn' option from the first screen.
 * Enter a name for the new building and press Add
+* Select wifi access points that are permanent inside the building using the 'Friendly Wifis' button. Do not forget to save changes after adding all such access points.
 * Now you need to find different distinguishable positions inside the building. For better results, choose different rooms inside the building as different positions.
 * Name the position and press calibrate button.
 * The scanning starts after you press start button. Time for scanning is set as 30 seconds.
@@ -24,6 +25,7 @@ A MVP android application which is able to estimate the position of a user withi
 * Swipe left/right on a position name to remove a position from the list.
 * You can re-calibrate a position by clicking on a position again.
 * Once you have added enough positions inside the building, press the update button to sync this readings to server, so that this data can be used from other devices as well.
+
 
 	### Locate
 * Choose the 'Locate' option from the first screen.
@@ -52,13 +54,6 @@ A MVP android application which is able to estimate the position of a user withi
 		- Url 	 : http://ajnas.in/wifips/api/
 		- Response: JSON-Array of all building's data
 
-
-* Submit Location
-
-		- Method : POST
-		- Url 	 : 
-		- Response : 
-			{result:"success"} or {result:"failure"}
 
 ##How to Contribute
 * Fork the repo
