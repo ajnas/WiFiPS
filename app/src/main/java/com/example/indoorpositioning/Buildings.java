@@ -3,6 +3,9 @@ package com.example.indoorpositioning;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,8 +27,14 @@ public class Buildings extends Activity {
 	Button add;
 	EditText buildingName;
 	ArrayAdapter<String> arrayAdapter;
+    Context context = this;
 
-	
+    private void switchToPositionsActivity(String data) {
+        Intent intent = new Intent(context, Positions.class);
+        intent.putExtra("BUILDING_NAME", data);
+        startActivity(intent);
+    }
+
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
 		setContentView(R.layout.buildings);
@@ -67,17 +76,33 @@ public class Buildings extends Activity {
         });
         buildingName.setText("");
 
-		add.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				String input=buildingName.getText().toString();
-				Intent intent=new Intent(getApplicationContext(),Positions.class);
-				intent.putExtra("BUILDING_NAME",input);
-				startActivity(intent);
+        add.setOnClickListener(new View.OnClickListener() {
 
-			}
-		});
+            @Override
+            public void onClick(View arg0) {
+                final String input = buildingName.getText().toString();
+                if (input.length() < 4) {
+                    new AlertDialog.Builder(context)
+                            .setTitle(getString(R.string.warning))
+                            .setMessage(getString(R.string.dialog_message))
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    switchToPositionsActivity(input);
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User cancelled
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                } else {
+                    switchToPositionsActivity(input);
+                }
+            }
+        });
+
 		buildings = db.getBuildings();
 		buildingsList = (ListView) findViewById(R.id.buildingslist);
 		arrayAdapter = new ArrayAdapter<String>(this,
@@ -90,10 +115,10 @@ public class Buildings extends Activity {
 		    Intent intent=new Intent(getApplicationContext(),Positions.class);
 			intent.putExtra("BUILDING_NAME",selectedBuilding);
 			startActivityForResult(intent,0);
-		    
+
 		    }
 
-			
+
 		});
 
         SwipeDismissListViewTouchListener touchListener =
@@ -117,7 +142,7 @@ public class Buildings extends Activity {
                             }
                         });
         buildingsList.setOnTouchListener(touchListener);
-		
+
 
 	}
 
