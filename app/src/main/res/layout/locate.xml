@@ -21,12 +21,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/result"
-        android:textSize="35dp"
+        android:textSize="30dp"
         android:text=""
         android:textColor="#ff0000"
         android:layout_gravity="center_horizontal|center_vertical"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/result2"
+        android:textColor="#ff0000"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp" />
 
     <TextView
 
