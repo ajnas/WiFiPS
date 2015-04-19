@@ -46,7 +46,7 @@ public class Locate extends Activity {
 	String building;
 	TextView result;
 	Button locate;
-
+    TextView result2;
 
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
@@ -56,7 +56,8 @@ public class Locate extends Activity {
 		locate = (Button) findViewById(R.id.locate);
 
 		result = (TextView) findViewById(R.id.result);
-		arrayAdapter = new ArrayAdapter<String>(this,
+        result2 = (TextView) findViewById(R.id.result2); ///////////////////////////////////
+        arrayAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, buildings);
 
 		locate.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +117,7 @@ public class Locate extends Activity {
 		ArrayList<Router> wifis = db.getFriendlyWifis(building);
 
 		int min_distance = positionData.uDistance(positionsData.get(0), wifis);
+        int j=0;
 		closestPosition = positionsData.get(0).getName();
 		String res = "";
 		res += closestPosition + "\n" + min_distance;
@@ -124,24 +126,56 @@ public class Locate extends Activity {
 			int distance = positionData.uDistance(positionsData.get(i), wifis);
 			res += "\n" + positionsData.get(i).getName() + "\n" + distance;
 			res += "\n" + positionsData.get(i).toString();
-			if (distance <= min_distance) {
+			if (distance < min_distance) {
 				min_distance = distance;
-
+                j=i;
 				closestPosition = positionsData.get(i).getName();
 
 			}
 
 		}
-		if (min_distance == PositionData.MAX_DISTANCE){
-          closestPosition="OUT OF RANGE";
-          Toast.makeText(this,"You are out of range of the selected building",Toast.LENGTH_LONG).show();
+           if (min_distance == PositionData.MAX_DISTANCE){
+                closestPosition="OUT OF RANGE";
+                Toast.makeText(this,"You are out of range of the selected building",Toast.LENGTH_LONG).show();
 
-		}
-        result.setText(closestPosition);
+            }
+            result.setText("Nearest point :  "+ closestPosition);
 
-		
-			
-		res += "\nCurrent:\n" + positionData.toString();
+            //////////////////////////////////////////////////
+            min_distance = positionData.uDistance(positionsData.get(0), wifis);
+            String closestPosition2 = null;
+
+            closestPosition2 = positionsData.get(0).getName();
+            res = "";
+            res += closestPosition2 + "\n" + min_distance;
+            res += "\n" + positionsData.get(0).toString();
+            for (int i = 1; i < positionsData.size(); i++) {
+               if(i!=j) {
+                    int distance = positionData.uDistance(positionsData.get(i), wifis);
+                    res += "\n" + positionsData.get(i).getName() + "\n" + distance;
+                    res += "\n" + positionsData.get(i).toString();
+                    closestPosition2 = positionsData.get(i).getName();//////////////////////////
+                    if(closestPosition2.equals(closestPosition))
+                        continue;
+                    if (distance < min_distance) {
+                        min_distance = distance;
+                        closestPosition2 = positionsData.get(i).getName();
+
+                    }
+                }
+            }
+
+            if (min_distance == PositionData.MAX_DISTANCE){
+                closestPosition2="OUT OF RANGE";
+                Toast.makeText(this,"You are out of range of the selected building",Toast.LENGTH_LONG).show();
+
+            }
+            result2.setText("2nd nearest point : " + closestPosition2);
+
+
+
+
+            res += "\nCurrent:\n" + positionData.toString();
 		Log.v("Result",res);
 
 
