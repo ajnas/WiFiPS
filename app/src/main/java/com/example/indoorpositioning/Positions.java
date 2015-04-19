@@ -6,6 +6,11 @@ import java.util.List;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Context;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 
@@ -27,7 +32,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -119,11 +124,21 @@ public class Positions extends Activity {
         calibrate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Scan.class);
-                intent.putExtra("POSITION_NAME", positionName.getText().toString());
-                intent.putExtra("isLearning", isLearning);
-                intent.putExtra("NUMBER_OF_SECONDS", readingCount);
-                startActivityForResult(intent, SCAN_REQUEST);
+
+                if(db.getFriendlyWifis(building).isEmpty()) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Select one or more Friendly WiFi";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                else {
+                    Intent intent = new Intent(getApplicationContext(), Scan.class);
+                    intent.putExtra("POSITION_NAME", positionName.getText().toString());
+                    intent.putExtra("isLearning", isLearning);
+                    intent.putExtra("NUMBER_OF_SECONDS", readingCount);
+                    startActivityForResult(intent, SCAN_REQUEST);
+                }
             }
         });
         finish.setOnClickListener(new OnClickListener() {

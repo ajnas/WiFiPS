@@ -10,12 +10,15 @@ import java.util.TimerTask;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.DialogInterface;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.DropBoxManager.Entry;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +27,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Scan extends Activity {
 
@@ -69,7 +73,23 @@ public class Scan extends Activity {
 		
 		wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		Intent intent = getIntent();
-		
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Confirm...");
+        alertDialog.setMessage("Scanning requires WiFi.");
+        alertDialog.setPositiveButton("Turn on WiFi",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Activity transfer to wifi settings
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                });
+        alertDialog.setCancelable(false);
+        if(!wifi.isWifiEnabled()) {
+            alertDialog.show();
+        }
+
 		currentPositionName =null;
 		if(intent.getBooleanExtra("isLearning",true))
 			currentPositionName = intent.getStringExtra("POSITION_NAME");
