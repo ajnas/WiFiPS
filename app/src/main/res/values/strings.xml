@@ -5,6 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="spinner_prompt">Select Building</string>
- 
 
+    <string name="warning">Warning</string>
+    <string name="dialog_message">Building name has less than 4 characters. Proceed?</string>
 </resources>
