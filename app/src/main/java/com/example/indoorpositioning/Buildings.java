@@ -44,9 +44,20 @@ public class Buildings extends Activity {
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 if(charSequence.toString().equals("")){
                     add.setEnabled(false);
+                } else {
+                    boolean exists = false;
+                    for (String buildingName: buildings) {
+                        if (charSequence.toString().equals(buildingName)) {
+                            add.setEnabled(false);
+                            exists = true;
+                            break;
+                        }
+                    }
+
+                    if (!exists) {
+                        add.setEnabled(true);
+                    }
                 }
-                else
-                    add.setEnabled(true);
             }
 
             @Override
