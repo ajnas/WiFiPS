@@ -2,26 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-	<Button
-          android:id="@+id/button_add"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Add more wifis" />
-          <ListView
-            android:id="@+id/friendly_wifis"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:divider="#0000CC"
-            android:dividerHeight="0.1dp" >
-        </ListView>
-        
-	<Button
-          android:id="@+id/save"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Save" />
-          
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add more wifis" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+
+    <ListView
+        android:id="@+id/friendly_wifis"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="#0000CC"
+        android:dividerHeight="0.1dp"></ListView>
+
 
 </LinearLayout>
 
