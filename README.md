@@ -1,8 +1,8 @@
-#WiFi Based Indoor Positioning System
+# WiFi Based Indoor Positioning System
 
 A MVP android application which is able to estimate the position of a user within a building using WiFi technology. For better understanding this project, we recommend you to go through the docs folder of this repository.
 
-##Setting up
+## Setting up
 
 * [Install](http://example.com/) Android Studio
 * Checkout project from version control. Give repository url as
@@ -11,7 +11,7 @@ A MVP android application which is able to estimate the position of a user withi
 * Setup a php server with backend code and host it on your own server. It uses [Slim framework](https://www.slimframework.com/) 
 * Change the **BASE_URL** in android code to your server url in **Config.java** file
 
-##Testing the App
+## Testing the App
 
 * Run the app to your android phone.
 * Turn on WiFi
@@ -57,11 +57,11 @@ A MVP android application which is able to estimate the position of a user withi
 		- Response: JSON-Array of all building's data
 
 
-##How to Contribute
+## How to Contribute
 * Fork the repo
 * Commit changes to a branch in your fork
 * Pull request with your changes
 
-##Developers
+## Developers
 
 [Ajnas](https://github.com/ajnas) and [Jazeem](https://github.com/jazeem). Feel free to contact us in case of any issue while setting up/testing. 
