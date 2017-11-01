@@ -7,6 +7,9 @@ A MVP android application which is able to estimate the position of a user withi
 * [Install](http://example.com/) Android Studio
 * Checkout project from version control. Give repository url as
  http://github.com/ajnas/wifips.git
+* Create MYSQL database with tables to store readings and list of access points. Please refer  [this file](backend/schema.txt) for necessary schema details
+* Setup a php server with backend code and host it on your own server. It uses [Slim framework](https://www.slimframework.com/) 
+* Change the **BASE_URL** in android code to your server url in **Config.java** file
 
 ##Testing the App
 
@@ -14,7 +17,7 @@ A MVP android application which is able to estimate the position of a user withi
 * Turn on WiFi
 * Go to some building were at least 3 wifi access points are available.
 
-	### Learn/Calibrate
+### Learn/Calibrate
 * Choose the 'Learn' option from the first screen.
 * Enter a name for the new building and press Add
 * Select wifi access points that are permanent inside the building using the 'Friendly Wifis' button. Do not forget to save changes after adding all such access points.
@@ -26,14 +29,13 @@ A MVP android application which is able to estimate the position of a user withi
 * You can re-calibrate a position by clicking on a position again.
 * Once you have added enough positions inside the building, press the update button to sync this readings to server, so that this data can be used from other devices as well.
 
-
-	### Locate
+### Locate
 * Choose the 'Locate' option from the first screen.
 * Choose the building where you want to locate your position.
 * Press start button and complete the scanning process.
 * Your position obtained from the calculations are displayed in the screen.
 
-    ### Sync
+### Sync
 * Use the 'Sync' button in the first screen to load the buildings from the server.		  The readings taken from other devices are also displayed. 
 
 ## Api Details
@@ -41,7 +43,7 @@ A MVP android application which is able to estimate the position of a user withi
 * Submit a building's calibrated readings to server
 
 		- Method : POST
-		- Url 	 : http://ajnas.in/wifips/api/submit
+		- Url 	 : http://your-server.com/api/submit
 		- Params : 
 			mac - Device's mac address
 			data - Json object containing building's calibrated readings
@@ -51,7 +53,7 @@ A MVP android application which is able to estimate the position of a user withi
 * Fetch Entire buildings data
 
 		- Method : GET
-		- Url 	 : http://ajnas.in/wifips/api/
+		- Url 	 : http://your-server.com/api/
 		- Response: JSON-Array of all building's data
 
 
