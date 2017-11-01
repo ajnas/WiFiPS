@@ -1,13 +1,13 @@
 Reading
-	- building_id
-	- position_id
-	- mac_id
-	- ssid
-	- rssi
+	- building_id (char-50)
+	- position_id	(char-50)
+	- mac_id (char-50)
+	- ssid	(char-50)
+	- rssi	(float)
 	
 Access Point
-	- building_id
-	- ssid
-	- mac_id
+	- building_id (char-50)
+	- ssid	(char-50)
+	- mac_id (char-50)
 
 
