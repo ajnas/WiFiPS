@@ -1,0 +1,13 @@
+Reading
+	- building_id
+	- position_id
+	- mac_id
+	- ssid
+	- rssi
+	
+Access Point
+	- building_id
+	- ssid
+	- mac_id
+
+
