@@ -10,7 +10,7 @@ A MVP android application which is able to estimate the position of a user withi
 
 ## Testing the App
 
-* Run the app to your android phone.
+* Download [Demo App](demo.apk) to your android phone or run the imported code from Android Studio to your device.
 * Turn on WiFi
 * Go to some building were at least 3 wifi access points are available.
 

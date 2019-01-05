@@ -1,5 +1,5 @@
 # built application files
-*.apk
+*.DS_Store
 *.ap_
 
 # files for the dex VM
