@@ -1,11 +1,5 @@
 package com.example.indoorpositioning;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.example.indoorpositioning.R.id;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,9 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,19 +19,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FriendlyWifis extends Activity {
 	private Button addWifi;
@@ -61,7 +42,7 @@ public class FriendlyWifis extends Activity {
 		setContentView(R.layout.settings);
 		db = new DatabaseHelper(this);
 		addWifi = (Button) findViewById(R.id.button_add);
-		wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 		addWifi.setOnClickListener(new ButtonClickHandler());
 		save=(Button) findViewById(R.id.save);
 		
