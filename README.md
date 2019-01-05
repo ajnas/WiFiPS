@@ -7,9 +7,6 @@ A MVP android application which is able to estimate the position of a user withi
 * [Install](http://example.com/) Android Studio
 * Clone or Download project from this url http://github.com/ajnas/wifips
 * From Android Studio, click on Open project and select the android-client folder inside the downloaded project.
-* Create MYSQL database with tables to store readings and list of access points. Please refer  [this file](backend/schema.txt) for necessary schema details
-* Setup a php server with backend code and host it on your own server. It uses [Slim framework](https://www.slimframework.com/) 
-* Change the **BASE_URL** in android code to your server url in **Config.java** file
 
 ## Testing the App
 
@@ -35,27 +32,12 @@ A MVP android application which is able to estimate the position of a user withi
 * Press start button and complete the scanning process.
 * Your position obtained from the calculations are displayed in the screen.
 
-### Sync
+## Syncing data to server [OPTIONAL]
+* Create MYSQL database with tables to store readings and list of access points. Please refer  [this file](backend/schema.txt) for necessary schema details
+* Setup a php server with backend code included in this project and host it on your own server. It uses [Slim framework](https://www.slimframework.com/).
+* Change the **BASE_URL** in android code to your server url in **Config.java** file
+* Run app to your Android device from Android Studio
 * Use the 'Sync' button in the first screen to load the buildings from the server.		  The readings taken from other devices are also displayed. 
-
-## Api Details
-
-* Submit a building's calibrated readings to server
-
-		- Method : POST
-		- Url 	 : http://your-server.com/api/submit
-		- Params : 
-			mac - Device's mac address
-			data - Json object containing building's calibrated readings
-		- Response:
-			{result:"success"} or {result:"failure"}
-
-* Fetch Entire buildings data
-
-		- Method : GET
-		- Url 	 : http://your-server.com/api/
-		- Response: JSON-Array of all building's data
-
 
 ## How to Contribute
 * Fork the repo
