@@ -5,8 +5,8 @@ A MVP android application which is able to estimate the position of a user withi
 ## Setting up
 
 * [Install](http://example.com/) Android Studio
-* Checkout project from version control. Give repository url as
- http://github.com/ajnas/wifips.git
+* Clone or Download project from this url http://github.com/ajnas/wifips
+* From Android Studio, click on Open project and select the android-client folder inside the downloaded project.
 * Create MYSQL database with tables to store readings and list of access points. Please refer  [this file](backend/schema.txt) for necessary schema details
 * Setup a php server with backend code and host it on your own server. It uses [Slim framework](https://www.slimframework.com/) 
 * Change the **BASE_URL** in android code to your server url in **Config.java** file
