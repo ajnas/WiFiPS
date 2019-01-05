@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.util.Log;
-
 public class PositionData implements Serializable {
 	public static final int MAX_DISTANCE=99999999;
 	private String name;
-	public static final int MINIMUM_COMMON_ROUTERS=3;
+	public static final int MINIMUM_COMMON_ROUTERS=1;
 	public HashMap<String, Integer> values;
     public HashMap<String,String> routers;
 	public PositionData(String name) {

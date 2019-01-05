@@ -24,7 +24,6 @@ public class Locate extends Activity {
 	String building;
 	TextView result;
 	Button locate;
-    TextView result2;
 
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
@@ -34,7 +33,6 @@ public class Locate extends Activity {
 		locate = (Button) findViewById(R.id.locate);
 
 		result = (TextView) findViewById(R.id.result);
-        result2 = (TextView) findViewById(R.id.result2); ///////////////////////////////////
         arrayAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, buildings);
 
@@ -148,7 +146,6 @@ public class Locate extends Activity {
                 Toast.makeText(this,"You are out of range of the selected building",Toast.LENGTH_LONG).show();
 
             }
-            result2.setText("2nd nearest point : " + closestPosition2);
 
 
 
