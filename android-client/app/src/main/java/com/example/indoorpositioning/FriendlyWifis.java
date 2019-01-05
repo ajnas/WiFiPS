@@ -1,13 +1,16 @@
 package com.example.indoorpositioning;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FriendlyWifis extends Activity {
+	private static final int PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION =  1;
 	private Button addWifi;
 	WifiManager wifi;
 	List<ScanResult> results;
@@ -99,13 +103,32 @@ public class FriendlyWifis extends Activity {
 
 	public class ButtonClickHandler implements View.OnClickListener {
 		public void onClick(View view) {
-			results = wifi.getScanResults();
-			updateOptions();
-			
-			onCreateDialog(0).show();
+			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+				requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+						PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION);
+				//After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
+			}else{
+				getAndShowScanResults();
+			}
 		}
-
 	}
+
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions,
+										   int[] grantResults) {
+		if (requestCode == PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION
+				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			getAndShowScanResults();
+		}
+	}
+
+	private void getAndShowScanResults() {
+		results = wifi.getScanResults();
+		updateOptions();
+		onCreateDialog(0).show();
+	}
+
 
 	@Override
 	protected Dialog onCreateDialog(int id) {
